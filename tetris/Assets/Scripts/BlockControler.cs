@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
-    public static int Width = 10;
-    public static int Height = 20;
-
     public float normalFallTime = 1f;
     public float softDropFallTime = 0.05f;
 
     public float fallTime;
     float prevTime;
+
+    private BoardCommander board;
+
+    private void Awake()
+    {
+        board = FindObjectOfType<BoardCommander>();
+    }
 
     void Update()
     {
@@ -51,7 +55,7 @@ public class BlockController : MonoBehaviour
     {
         if (Time.time - prevTime >= fallTime)
         {
-            if (CanMove(Vector3.down))
+            if (board.IsValidPosition(gameObject.transform, Vector3.down))
             {
                 transform.position += Vector3.down;
             }
@@ -66,7 +70,7 @@ public class BlockController : MonoBehaviour
 
     void TryMove(Vector3 dir)
     {
-        if (CanMove(dir))
+        if (board.IsValidPosition(gameObject.transform, dir))
             transform.position += dir;
     }
 
@@ -74,28 +78,13 @@ public class BlockController : MonoBehaviour
     {
         transform.Rotate(0, 0, -90);
 
-        if (!CanMove(Vector3.zero))
+        if (!board.IsValidPosition(gameObject.transform, Vector3.zero))
             transform.Rotate(0, 0, 90);
-    }
-
-    bool CanMove(Vector3 dir)
-    {
-        foreach (Transform block in transform)
-        {
-            Vector3 nextPos = block.position + dir;
-
-            if (nextPos.x < -4.5f || nextPos.x > 4.5f)
-                return false;
-
-            if (nextPos.y < -9.5f)
-                return false;
-        }
-        return true;
     }
 
     void HardDrop()
     {
-        while (CanMove(Vector3.down))
+        while (board.IsValidPosition(gameObject.transform, Vector3.down))
         {
             transform.position += Vector3.down;
         }
@@ -105,6 +94,7 @@ public class BlockController : MonoBehaviour
 
     void OnLanded()
     {
+        board.FixBlock(transform);
         enabled = false;
     }
 }

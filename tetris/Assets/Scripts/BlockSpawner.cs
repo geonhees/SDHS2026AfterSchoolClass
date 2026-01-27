@@ -11,7 +11,7 @@ public class BlockSpawner : MonoBehaviour
         SpawnBlock();
     }
 
-    void SpawnBlock()
+    public void SpawnBlock()
     {
         int randomIndex = Random.Range(0, blockPrefabs.Length);
         Instantiate(blockPrefabs[randomIndex], transform.position, Quaternion.identity);
