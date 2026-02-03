@@ -10,11 +10,15 @@ public class BlockController : MonoBehaviour
     public float fallTime;
     float prevTime;
 
+    public int BlockIndex = -1;
+
     private BoardCommander board;
+    private BlockSpawner spawner;
 
     private void Awake()
     {
         board = FindObjectOfType<BoardCommander>();
+        spawner = FindObjectOfType<BlockSpawner>();
     }
 
     void Update()
@@ -48,7 +52,11 @@ public class BlockController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Space))
         {
             HardDrop();
-        }            
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            spawner.Holding(this);
+        }
     }
 
     void AutoFall()
@@ -95,6 +103,7 @@ public class BlockController : MonoBehaviour
     void OnLanded()
     {
         board.FixBlock(transform);
+        spawner.hasHeldBlock = false;
         enabled = false;
     }
 }

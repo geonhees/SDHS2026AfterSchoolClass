@@ -6,14 +6,47 @@ public class BlockSpawner : MonoBehaviour
 {
     public GameObject[] blockPrefabs;
 
+    public int holdingBlockIndex = -1;
+    public bool hasHeldBlock = false;
+
     void Start()
     {
-        SpawnBlock();
+        SpawnBlock(-1);
     }
 
-    public void SpawnBlock()
+    public void SpawnBlock(int index)
     {
-        int randomIndex = Random.Range(0, blockPrefabs.Length);
-        Instantiate(blockPrefabs[randomIndex], transform.position, Quaternion.identity);
+        if(!hasHeldBlock)
+        {
+            int randomIndex = Random.Range(0, blockPrefabs.Length);
+            GameObject obj = Instantiate(blockPrefabs[randomIndex], transform.position, Quaternion.identity);
+
+            obj.GetComponent<BlockController>().BlockIndex = randomIndex;
+        }
+        else
+        {
+            GameObject obj = Instantiate(blockPrefabs[index], transform.position, Quaternion.identity);
+
+            obj.GetComponent<BlockController>().BlockIndex = index;
+        }
+    }
+    public void Holding(BlockController current)
+    {
+        if (hasHeldBlock) return;
+
+        int currentIndex = current.BlockIndex;
+
+        if (holdingBlockIndex == -1)
+        {
+            holdingBlockIndex = currentIndex;
+            SpawnBlock(-1);
+        }
+        else
+        {
+            SpawnBlock(holdingBlockIndex);
+            holdingBlockIndex = currentIndex;
+        }
+        hasHeldBlock = true;
+        Destroy(current.gameObject);
     }
 }

@@ -262,6 +262,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8694776010337272079}
   - component: {fileID: -256619876754480640}
+  - component: {fileID: -5023538970619355649}
   m_Layer: 0
   m_Name: Block2
   m_TagString: Untagged
@@ -298,6 +299,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8dba95e0e4df657478607afdb8815dfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  normalFallTime: 1
+  softDropFallTime: 0.05
+  fallTime: 0
+--- !u!114 &-5023538970619355649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821488143738854707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8508f3c493e4fc746975198bf7cbe87b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &9206424407794004052

@@ -22,7 +22,7 @@ public class InGameCommander : CommanderBase
             return;
         }
 
-        blockSpawner.SpawnBlock();
+        blockSpawner.SpawnBlock(-1);
     }
     public void GameOver()
     {
