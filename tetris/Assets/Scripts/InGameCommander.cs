@@ -5,7 +5,7 @@ using UnityEngine;
 public class InGameCommander : CommanderBase
 {
     int score = 0;
-    BlockSpawner blockSpawner;
+    private BlockSpawner blockSpawner;
 
     private void Awake()
     {
@@ -15,7 +15,7 @@ public class InGameCommander : CommanderBase
     public void OnBlockFixed(int clearedLines, bool isGameOver)
     {
         AddScore(clearedLines);
-
+        blockSpawner.hasHeldBlock = false;
         if (isGameOver)
         {
             GameOver();

@@ -8,6 +8,7 @@ public class BlockSpawner : MonoBehaviour
 
     public int holdingBlockIndex = -1;
     public bool hasHeldBlock = false;
+    private bool holdingBlock = false;
 
     void Start()
     {
@@ -16,19 +17,18 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnBlock(int index)
     {
-        if(!hasHeldBlock)
+        GameObject obj;
+        if (holdingBlock)
         {
-            int randomIndex = Random.Range(0, blockPrefabs.Length);
-            GameObject obj = Instantiate(blockPrefabs[randomIndex], transform.position, Quaternion.identity);
-
-            obj.GetComponent<BlockController>().BlockIndex = randomIndex;
-        }
-        else
-        {
-            GameObject obj = Instantiate(blockPrefabs[index], transform.position, Quaternion.identity);
+            obj = Instantiate(blockPrefabs[index], transform.position, Quaternion.identity);
 
             obj.GetComponent<BlockController>().BlockIndex = index;
+            return;
         }
+        index = Random.Range(0, blockPrefabs.Length);
+        obj = Instantiate(blockPrefabs[index], transform.position, Quaternion.identity);
+
+        obj.GetComponent<BlockController>().BlockIndex = index;
     }
     public void Holding(BlockController current)
     {
@@ -40,6 +40,7 @@ public class BlockSpawner : MonoBehaviour
         {
             holdingBlockIndex = currentIndex;
             SpawnBlock(-1);
+            holdingBlock = true;
         }
         else
         {

@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8292485778212476587}
   - component: {fileID: -4274155019060588894}
-  - component: {fileID: -1796355936526799468}
   m_Layer: 0
   m_Name: Block5
   m_TagString: Untagged
@@ -52,18 +51,7 @@ MonoBehaviour:
   normalFallTime: 1
   softDropFallTime: 0.05
   fallTime: 0
---- !u!114 &-1796355936526799468
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4074735172716343150}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8508f3c493e4fc746975198bf7cbe87b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  BlockIndex: -1
 --- !u!1 &7000636566808797554
 GameObject:
   m_ObjectHideFlags: 0
