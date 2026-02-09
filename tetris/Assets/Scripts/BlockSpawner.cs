@@ -16,7 +16,7 @@ public class BlockSpawner : MonoBehaviour
 
     public void SpawnBlock(int index)
     {
-        if(!hasHeldBlock)
+        if(index == -1)
         {
             int randomIndex = Random.Range(0, blockPrefabs.Length);
             GameObject obj = Instantiate(blockPrefabs[randomIndex], transform.position, Quaternion.identity);
