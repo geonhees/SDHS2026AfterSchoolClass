@@ -18,7 +18,7 @@ public class GameManager : ManagerBase
     public void setState(GameState newState)
     {
         _currentState = newState;
-        SceneManager.LoadScene(newState.ToString());
+        SceneManager.LoadScene((int)newState);
     }
 
     public override void Initialize()
