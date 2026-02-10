@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class InGameCommander : CommanderBase
 {
-    int score = 0;
+    public static int score = 0;
     private BlockSpawner blockSpawner;
 
     private void Awake()
     {
+        Time.timeScale = 1f;
         blockSpawner = FindObjectOfType<BlockSpawner>();
     }
 
@@ -26,7 +27,7 @@ public class InGameCommander : CommanderBase
     }
     public void GameOver()
     {
-        Debug.Log("Game Over");
+        Managers.Game.setState(GameManager.GameState.Result);
         Time.timeScale = 0f;
     }
 
