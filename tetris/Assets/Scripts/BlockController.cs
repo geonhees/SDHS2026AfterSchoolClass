@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BlockController : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class BlockController : MonoBehaviour
     float prevTime;
 
     public int BlockIndex = -1;
-
+     
     private BoardCommander board;
     private BlockSpawner spawner;
 
@@ -19,51 +20,70 @@ public class BlockController : MonoBehaviour
     {
         board = FindObjectOfType<BoardCommander>();
         spawner = FindObjectOfType<BlockSpawner>();
+        fallTime = normalFallTime;
     }
 
     void Update()
     {
-        HandleInput();
+        //HandleInput();
         AutoFall();
     }
 
-    void HandleInput()
+    //void HandleInput()
+    //{
+    //    if (Input.GetKey(KeyCode.DownArrow))
+    //    {
+    //        fallTime = softDropFallTime;
+    //    }
+    //    else
+    //    {
+    //        fallTime = normalFallTime;
+    //    }
+    //    if (leftButton)
+    //    {
+    //        TryMove(Vector3.left);
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.RightArrow))
+    //    {
+    //        TryMove(Vector3.right);
+    //    }            
+    //    else if (Input.GetKeyDown(KeyCode.UpArrow))
+    //    {
+    //        TryRotate();
+    //    } 
+    //    else if (Input.GetKeyDown(KeyCode.Space))
+    //    {
+    //        HardDrop();
+    //    }
+    //    else if (Input.GetKeyDown(KeyCode.LeftShift))
+    //    {
+    //        spawner.Holding(this);
+    //    }
+    //}
+    public void MoveLeft()
     {
-        if (Input.GetKey(KeyCode.DownArrow))
-        {
-            fallTime = softDropFallTime;
-        }
-        else
-        {
-            fallTime = normalFallTime;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            TryMove(Vector3.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            TryMove(Vector3.right);
-        }            
-        else if (Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            TryRotate();
-        } 
-        else if (Input.GetKeyDown(KeyCode.Space))
-        {
-            HardDrop();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            spawner.Holding(this);
-        }
+        TryMove(Vector3.left);
     }
 
+    public void MoveRight()
+    {
+        TryMove(Vector3.right);
+    }
+
+    public void Rotate()
+    {
+        TryRotate();
+    }
+
+    public void Hold(BlockController currentBlock)
+    {
+        spawner.Holding(currentBlock);
+    }
     void AutoFall()
     {
         if (Time.time - prevTime >= fallTime)
         {
-            if (board.IsValidPosition(gameObject.transform, Vector3.down))
+            if (board.IsValidPosition(transform, Vector3.down))
             {
                 transform.position += Vector3.down;
             }
@@ -90,7 +110,7 @@ public class BlockController : MonoBehaviour
             transform.Rotate(0, 0, 90);
     }
 
-    void HardDrop()
+    public void HardDrop()
     {
         while (board.IsValidPosition(gameObject.transform, Vector3.down))
         {
@@ -102,6 +122,7 @@ public class BlockController : MonoBehaviour
 
     void OnLanded()
     {
+        Debug.Log("Block Landed" + gameObject.name);
         board.FixBlock(transform);
         spawner.hasHeldBlock = false;
         enabled = false;

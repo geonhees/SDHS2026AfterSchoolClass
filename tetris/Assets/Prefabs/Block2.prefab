@@ -261,7 +261,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8694776010337272079}
-  - component: {fileID: -256619876754480640}
+  - component: {fileID: -2690485039054183808}
+  - component: {fileID: 8035357618255184546}
   m_Layer: 0
   m_Name: Block2
   m_TagString: Untagged
@@ -288,7 +289,7 @@ Transform:
   - {fileID: 3886727013806048810}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-256619876754480640
+--- !u!114 &-2690485039054183808
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -304,6 +305,18 @@ MonoBehaviour:
   softDropFallTime: 0.05
   fallTime: 0
   BlockIndex: -1
+--- !u!114 &8035357618255184546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821488143738854707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8508f3c493e4fc746975198bf7cbe87b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9206424407794004052
 GameObject:
   m_ObjectHideFlags: 0

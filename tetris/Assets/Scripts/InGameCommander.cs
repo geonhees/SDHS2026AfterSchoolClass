@@ -24,6 +24,7 @@ public class InGameCommander : CommanderBase
         }
 
         blockSpawner.SpawnBlock(-1);
+        Debug.Log("Land and spawn new block");
     }
     public void GameOver()
     {
